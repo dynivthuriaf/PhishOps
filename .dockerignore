@@ -1,0 +1,16 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+Artifacts
+logs
+mlruns
+saved_models
+prediction_output
+valid_data
