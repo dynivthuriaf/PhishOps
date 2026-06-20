@@ -164,6 +164,8 @@ Le workflow `.github/workflows/main.yml` déploie automatiquement chaque push su
 | `MLFLOW_TRACKING_USERNAME` | Facultatif |
 | `MLFLOW_TRACKING_PASSWORD` | Facultatif |
 
+6. Dans l'onglet **Variables** du même écran, créer `ENABLE_AWS_DEPLOYMENT` avec la valeur `true`. Sans cette variable, la CI contrôle le projet mais les jobs AWS restent volontairement désactivés.
+
 Après le premier déploiement, l'API est accessible sur `http://<IP_PUBLIQUE_EC2>:8000/docs`.
 
 > La route `/train` déclenche un traitement coûteux et doit être protégée ou désactivée avant d'exposer l'API publiquement.

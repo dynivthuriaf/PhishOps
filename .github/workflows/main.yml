@@ -19,15 +19,26 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Lint code
-        run: echo "Linting repository"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
 
-      - name: Run unit tests
-        run: echo "Running unit tests"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate source and API import
+        run: |
+          python -m compileall -q app.py main.py push_data.py networksecurity
+          python -c "from app import app; assert app.title"
 
   build-and-push-ecr-image:
     name: Continuous Delivery
     needs: integration
+    if: ${{ vars.ENABLE_AWS_DEPLOYMENT == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
